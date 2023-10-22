@@ -1,6 +1,6 @@
 import os
 from flask import request, jsonify, current_app, Blueprint
-from flask_jwt_extended import jwt_required, create_access_token
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from .models import db, User, Task
 from .tasks import convert_video
 
@@ -49,10 +49,13 @@ def login():
 @api.route('/tasks', methods=['GET'])
 @jwt_required()
 def get_tasks():
+    print("MIERDA", flush=True)
     max_results = request.args.get('max', default=None, type=int)
     order = request.args.get('order', default=0, type=int)
 
-    user_id = User.query.filter_by(username=current_app.config['JWT_IDENTITY_CLAIM']).first().id
+    username = get_jwt_identity()
+    print("username",username)
+    user_id = User.query.filter_by(username=username).first()
 
     if order == 0:
         tasks = Task.query.filter_by(user_id=user_id).order_by(Task.id)
@@ -69,6 +72,7 @@ def get_tasks():
 @api.route('/tasks', methods=['POST'])
 @jwt_required()
 def create_task():
+    print("HOLA")
     if 'file' not in request.files or 'newFormat' not in request.form:
         return jsonify({'message': 'Missing file or newFormat field'}), 400
 

@@ -6,6 +6,7 @@ from dotenv import load_dotenv  # Import the load_dotenv function
 from .models import db
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
+from src.views import api
 
 
 url = URL.create(
@@ -51,7 +52,6 @@ def create_app():
     jwt.init_app(app)
 
     # Import and register blueprints
-    from src.views import api
     app.register_blueprint(api, url_prefix='/api')
 
     app.config.from_mapping(

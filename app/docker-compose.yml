@@ -8,16 +8,16 @@ services:
     ports:
       - 5000:5000
     env_file: .env
+    volumes:
+      - type: bind
+        source: ./
+        target: /app
     depends_on:
       - db
       - redis
     links:
       - db
       - redis
-    volumes:
-      - type: bind
-        source: ./
-        target: /app
 
   db:
     image: postgres:latest
