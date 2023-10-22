@@ -6,7 +6,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'your_secret_key')
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'your_jwt_secret_key')
 
 # SQLAlchemy Config
-SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://your_db_user:your_db_password@db/your_db_name')
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://test:test@db/test')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Celery Config

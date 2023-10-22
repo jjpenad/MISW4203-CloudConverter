@@ -44,6 +44,9 @@ def create_app():
     # Configure the database
     db.init_app(app)
 
+    with app.app_context():
+        db.create_all()
+
     # Configure JWT
     jwt.init_app(app)
 
