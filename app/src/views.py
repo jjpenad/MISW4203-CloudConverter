@@ -6,7 +6,7 @@ from .tasks import convert_video
 
 api = Blueprint('api', __name__)
 
-@api.route('/api/auth/signup', methods=['POST'])
+@api.route('/auth/signup', methods=['POST'])
 def signup():
     data = request.get_json()
     username = data.get('username')
@@ -32,7 +32,7 @@ def signup():
 
     return jsonify({'message': 'User created successfully'}), 201
 
-@api.route('/api/auth/login', methods=['POST'])
+@api.route('/auth/login', methods=['POST'])
 def login():
     data = request.get_json()
     username = data.get('username')
@@ -46,7 +46,7 @@ def login():
     access_token = create_access_token(identity=username)
     return jsonify(access_token=access_token), 200
 
-@api.route('/api/tasks', methods=['GET'])
+@api.route('/tasks', methods=['GET'])
 @jwt_required()
 def get_tasks():
     max_results = request.args.get('max', default=None, type=int)
@@ -66,7 +66,7 @@ def get_tasks():
 
     return jsonify(tasks), 200
 
-@api.route('/api/tasks', methods=['POST'])
+@api.route('/tasks', methods=['POST'])
 @jwt_required()
 def create_task():
     if 'file' not in request.files or 'newFormat' not in request.form:
@@ -88,7 +88,7 @@ def create_task():
 
     return jsonify({'message': 'Task created successfully'}), 201
 
-@api.route('/api/tasks/<int:id_task>', methods=['GET'])
+@api.route('/tasks/<int:id_task>', methods=['GET'])
 @jwt_required()
 def get_task(id_task):
     user_id = User.query.filter_by(username=current_app.config['JWT_IDENTITY_CLAIM']).first().id
@@ -100,7 +100,7 @@ def get_task(id_task):
 
     return jsonify(task.to_dict()), 200
 
-@api.route('/api/tasks/<int:id_task>', methods=['DELETE'])
+@api.route('/tasks/<int:id_task>', methods=['DELETE'])
 @jwt_required()
 def delete_task(id_task):
     user_id = User.query.filter_by(username=current_app.config['JWT_IDENTITY_CLAIM']).first().id
