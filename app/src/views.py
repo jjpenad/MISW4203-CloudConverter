@@ -103,14 +103,12 @@ def get_task(id_task):
 @api.route('/tasks/<int:id_task>', methods=['DELETE'])
 @jwt_required()
 def delete_task(id_task):
-    user_id = User.query.filter_by(username=current_app.config['JWT_IDENTITY_CLAIM']).first().id
-
-    task = Task.query.filter_by(id=id_task, user_id=user_id).first()
-
-    if not task:
+    task = Task.query.get(id_task)
+    if task is None:
         return jsonify({'message': 'Task not found'}), 404
 
     db.session.delete(task)
     db.session.commit()
 
-    return '', 204
+    return jsonify({'message': 'Task deleted successfully'}), 200
+
