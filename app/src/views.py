@@ -58,9 +58,9 @@ def get_tasks():
     user_id = User.query.filter_by(username=username).first()
 
     if order == 0:
-        tasks = Task.query.filter_by(user_id=user_id).order_by(Task.id)
+        tasks = Task.query.filter_by(user_id=user_id.id).order_by(Task.id)
     else:
-        tasks = Task.query.filter_by(user_id=user_id).order_by(Task.id.desc())
+        tasks = Task.query.filter_by(user_id=user_id.id).order_by(Task.id.desc())
 
     if max_results:
         tasks = tasks.limit(max_results)
@@ -79,7 +79,9 @@ def create_task():
     file = request.files['file']
     new_format = request.form['newFormat']
 
-    user = User.query.filter_by(username=current_app.config['JWT_IDENTITY_CLAIM']).first()
+    username = get_jwt_identity()
+
+    user = User.query.filter_by(username=username).first()
 
     task = Task(user_id=user.id, file_name=file.filename, new_format=new_format)
     db.session.add(task)
