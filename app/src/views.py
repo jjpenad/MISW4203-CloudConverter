@@ -70,7 +70,6 @@ def get_tasks():
 @api.route('/tasks', methods=['POST'])
 @jwt_required()
 def create_task():
-    print("HOLA")
     if 'file' not in request.files or 'newFormat' not in request.form:
         return jsonify({'message': 'Missing file or newFormat field'}), 400
 

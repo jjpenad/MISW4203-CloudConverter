@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: /start-server.sh
+    command: ./start-server.sh
     ports:
       - 5000:5000
     env_file: .env
@@ -21,8 +21,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: /start-worker.sh
+    command: ./start-worker.sh
     env_file: .env
+    volumes:
+      - type: bind
+        source: ./output
+        target: /app/output
     depends_on:
       - redis
       - db
