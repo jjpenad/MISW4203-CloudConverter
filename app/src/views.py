@@ -49,12 +49,10 @@ def login():
 @api.route('/tasks', methods=['GET'])
 @jwt_required()
 def get_tasks():
-    print("MIERDA", flush=True)
     max_results = request.args.get('max', default=None, type=int)
     order = request.args.get('order', default=0, type=int)
 
     username = get_jwt_identity()
-    print("username",username)
     user_id = User.query.filter_by(username=username).first()
 
     if order == 0:

@@ -28,6 +28,7 @@ def celery_init_app(app: Flask) -> Celery:
                 return self.run(*args, **kwargs)
 
     celery_app = Celery(app.name, task_cls=FlaskTask)
+    print(app.config["CELERY"], flush=True)
     celery_app.config_from_object(app.config["CELERY"])
     celery_app.set_default()
     app.extensions["celery"] = celery_app
@@ -56,8 +57,8 @@ def create_app():
 
     app.config.from_mapping(
         CELERY=dict(
-            broker_url="redis://localhost",
-            result_backend="redis://localhost",
+            broker_url=app.config["REDIS_URL"],
+            result_backend=app.config["REDIS_URL"],
             task_ignore_result=True,
         ),
     )

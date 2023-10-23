@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: /start-server.sh
     ports:
       - 5000:5000
     env_file: .env
@@ -15,9 +16,16 @@ services:
     depends_on:
       - db
       - redis
-    links:
-      - db
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /start-worker.sh
+    env_file: .env
+    depends_on:
       - redis
+      - db
 
   db:
     image: postgres:latest

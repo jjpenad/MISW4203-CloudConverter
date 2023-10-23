@@ -18,8 +18,21 @@ RUN pip install -r requirements.txt
 # Copy the current directory contents into the container at /app
 COPY . /app/
 
-# Expose the port that Flask will run on
-EXPOSE 5000
+COPY ./entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//g' /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+COPY ./start-server.sh /start-server.sh
+RUN sed -i 's/\r$//g' ./start-server.sh
+RUN chmod +x ./start-server.sh
+
+COPY ./start-worker.sh /start-worker.sh
+RUN sed -i 's/\r$//g' ./start-worker.sh
+RUN chmod +x ./start-worker.sh
 
 # Start the Flask application
-CMD ["python", "run.py"]
+#CMD ["python", "run.py"]
+
+#CMD ["sh", "-c", "celery -A run worker --loglevel INFO && python run.py"]
+
+ENTRYPOINT ["/entrypoint.sh"]
