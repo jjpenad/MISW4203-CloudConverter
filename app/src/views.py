@@ -106,6 +106,9 @@ def delete_task(id_task):
     task = Task.query.get(id_task)
     if task is None:
         return jsonify({'message': 'Task not found'}), 404
+    
+    if task.status == 'processing':
+        return jsonify({'message': 'Task is being processed'}), 400
 
     db.session.delete(task)
     db.session.commit()
