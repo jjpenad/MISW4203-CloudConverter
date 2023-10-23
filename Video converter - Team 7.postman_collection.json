@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "d7426f13-d440-46ed-a64b-5979c8812e72",
+		"_postman_id": "a31128d9-f035-4a68-b861-3961c11aa910",
 		"name": "Video converter - Team 7",
+		"description": "# Documentación\n\nEsta aplicación permite convertir el formato de un video a un formato deseado. Está construida principalmente con Python, usando el framework Flask, así como Postgres, Redis y Celery, entre otros.\n\nEsta colección se puede ejecutar de manera local utilizando Docker, puede ver las intrucciones de instalación en el [repositorio](https://github.com/jjpenad/MISW4203-CloudConverter).\n\nPara los endpoints que requieren de autenticación, debe agregar un token válido que se genera al hacer un login exitoso. Para esto, en esas peticiones que lo requieren, agregue los siguientes campos en la pestaña `Headers:`\n\n| Key | Value | Description |\n| --- | --- | --- |\n| Authorization | Bearer (JWToken) | Reemplace todo el texto (JWToken) por el token que se generó en la autenticación |",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13279202"
 	},
@@ -32,7 +33,8 @@
 								"auth",
 								"signup"
 							]
-						}
+						},
+						"description": "Este endpoint permite la creación de un usuario nuevo cuya información se almacenará en la base de datos. No permite crear usuarios si `password1` y `password2` no coinciden o si el `email` ya está registrado\n\nA continuación se puede ver un ejemplo de una petición válida para crear un nuevo usuario:"
 					},
 					"response": []
 				},
@@ -40,13 +42,7 @@
 					"name": "Login - Autenticar usuario",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer (JWToken)",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"username\": \"nico\",\r\n    \"password\": \"password\"\r\n}",
@@ -65,7 +61,8 @@
 								"auth",
 								"login"
 							]
-						}
+						},
+						"description": "Este endpoint permite la autenticación de un usuario previamente registrado. Se valida que los datos sean correctos o se rechaza la petición. De ser exitosa, se responde con un token generado automáticamente y **que será necesario para el resto de peticiones de aquí en adelante. (Se recomienda copiar ese token al portapapeles)**\n\nA continuación se puede ver un ejemplo de una petición válida para autenticar a un usuario:"
 					},
 					"response": []
 				},
@@ -103,11 +100,13 @@
 							"path": [
 								"tasks"
 							]
-						}
+						},
+						"description": "_Para hacer uso de este endpoint se requiere un token de autenticación válido._\n\nEste endpoint permite convertir un video al formato deseado. Para esto, es necesario tener el video en la carpeta `/uploads.`\n\nEn la pestaña `Body` seleccione la opción `form-data` y agregue los siguiente valores:\n\n| Key | Value | **Description** |\n| --- | --- | --- |\n| file |  | Video al que se quiere convertir el formato. Verifique que a la derecha de `file` esté seleccionado el formato `file` |\n| newFormat |  | Formato al que desea ser convertido el video.  <br>E.x: mp4, avi, webm, etc |"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Este grupo de endpoints permiten crear un usuario nuevo, autenticar un usuario ya creado y hacer la conversión de formato de un video como tal.\n\nLa autenticación exitosa de un usuario genera un token que es necesario para todas las peticiones que se realicen a la aplicación."
 		},
 		{
 			"name": "GET",
@@ -131,7 +130,8 @@
 							"path": [
 								"tasks"
 							]
-						}
+						},
+						"description": "_Para hacer uso de este endpoint se requiere un token de autenticación válido._\n\nEste endpoint recupera todas las tareas procesadas y en proceso del usuario autenticado."
 					},
 					"response": []
 				},
@@ -155,11 +155,13 @@
 								"tasks",
 								"1"
 							]
-						}
+						},
+						"description": "_Para hacer uso de este endpoint se requiere un token de autenticación válido._\n\nEste endpoint recupera una tarea específica, ya sea procesada o en proceso, del usuario autenticado. El número al final de la ruta, que en este caso es 1, corresponde al id de la tarea que se desea recuperar. Si quiere recuperar una tarea con otro id, simplemente reemplace el número por el número de id de la tarea que recuperará."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Este grupo de endpoints permiten recuperar información sobre todas las tareas o una tarea específica del usuario autenticado."
 		},
 		{
 			"name": "DELETE",
@@ -191,11 +193,13 @@
 									"disabled": true
 								}
 							]
-						}
+						},
+						"description": "_Para hacer uso de este endpoint se requiere un token de autenticación válido._\n\nEl número al final de la ruta, que en este caso es 1, corresponde al id de la tarea que se desea eliminar. Si quiere eliminar una tarea con otro id, simplemente reemplace el número por el número de id de la tarea que eliminará."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Endpoint para eliminar una tarea específica. La tarea debe tener el `status` en `processed` para que sea válido eliminarla, de lo contrario, no se permitirá ejecutar esta acción."
 		}
 	]
 }
