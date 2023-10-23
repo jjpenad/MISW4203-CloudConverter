@@ -94,14 +94,11 @@ def create_task():
 @api.route('/tasks/<int:id_task>', methods=['GET'])
 @jwt_required()
 def get_task(id_task):
-    user_id = User.query.filter_by(username=current_app.config['JWT_IDENTITY_CLAIM']).first().id
-
-    task = Task.query.filter_by(id=id_task, user_id=user_id).first()
-
-    if not task:
+    task = Task.query.get(id_task)
+    if task is None:
         return jsonify({'message': 'Task not found'}), 404
-
     return jsonify(task.to_dict()), 200
+
 
 @api.route('/tasks/<int:id_task>', methods=['DELETE'])
 @jwt_required()
