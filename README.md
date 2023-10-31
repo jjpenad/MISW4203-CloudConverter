@@ -24,4 +24,4 @@
 Para ver la documentación completa sobre los distintos endpoints de esta aplicación, es necesario que importe la configuración de la colección de Postman del paso anterior.
 
 ## Despliegue básico en la nube:
-Actualmente, nuestra aplicación se encuentra desplegada en GCP en la siguiente [URL](http://34.29.108.46:5000)
+Actualmente, nuestra aplicación se encuentra desplegada en GCP en la siguiente [URL](http://34.29.108.46:5000). Los endpoints son los mismos que para la aplicación local, solo habría que cambiar el `localhost` por la IP anteriormente referenciada.
