@@ -22,3 +22,6 @@
 
 ## Endpoints
 Para ver la documentación completa sobre los distintos endpoints de esta aplicación, es necesario que importe la configuración de la colección de Postman del paso anterior.
+
+## Despliegue:
+Actualmente, nuestra aplicación se encuentra desplegada en GCP en la siguiente [URL](34.29.108.46:5000)
