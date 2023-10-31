@@ -7,7 +7,7 @@
 * Conocimientos en Git
 * Conocimientos en Postman y API REST
 
-## Instalación
+## Instalación (Local)
 * Clonar este repositorio en un directorio local
 * Acceder a la carpeta de este repositorio y luego a la carpeta `/app`
 * Si en la carpeta `/app` no existen las carpetas `/output` y `/uploads`, créelas en este directorio
@@ -23,5 +23,5 @@
 ## Endpoints
 Para ver la documentación completa sobre los distintos endpoints de esta aplicación, es necesario que importe la configuración de la colección de Postman del paso anterior.
 
-## Despliegue:
+## Despliegue básico en la nube:
 Actualmente, nuestra aplicación se encuentra desplegada en GCP en la siguiente [URL](http://34.29.108.46:5000)
