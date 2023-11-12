@@ -23,7 +23,7 @@ class Task(db.Model):
     __tablename__ = 'tasks'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    file_name = db.Column(db.String(255), nullable=False)
+    url = db.Column(db.String(255), nullable=False)
     new_format = db.Column(db.String(10), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     status = db.Column(db.String(20), default='uploaded')
@@ -32,7 +32,7 @@ class Task(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'file_name': self.file_name,
+            'url': self.url,
             'new_format': self.new_format,
             'timestamp': self.timestamp,
             'status': self.status,

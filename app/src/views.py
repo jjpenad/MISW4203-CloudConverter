@@ -70,24 +70,22 @@ def get_tasks():
 @api.route('/tasks', methods=['POST'])
 @jwt_required()
 def create_task():
-    if 'file' not in request.files or 'newFormat' not in request.form:
-        return jsonify({'message': 'Missing file or newFormat field'}), 400
+    if 'url' not in request.form or 'newFormat' not in request.form:
+        return jsonify({'message': 'Missing URL or newFormat field'}), 400
 
-    file = request.files['file']
+    url = request.form['url']
     new_format = request.form['newFormat']
 
     username = get_jwt_identity()
 
     user = User.query.filter_by(username=username).first()
 
-    task = Task(user_id=user.id, file_name=file.filename, new_format=new_format)
+    task = Task(user_id=user.id, url=url, new_format=new_format)
     db.session.add(task)
     db.session.commit()
 
-    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename))
-
     # Send the conversion task to Celery
-    convert_video.apply_async(args=(task.id, file.filename, new_format))
+    convert_video.apply_async(args=(task.id, url, new_format))
 
     return jsonify({'message': 'Task created successfully'}), 201
 
