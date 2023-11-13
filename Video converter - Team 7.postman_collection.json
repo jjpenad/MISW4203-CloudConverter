@@ -73,7 +73,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTg0MTAyOCwianRpIjoiZTcwZGY2ZmYtZWZiZi00MWI2LTllNjctZDIwMmZmYTRkNGI0IiwidHlwZSI6ImFjY2VzcyIsInVzZXJuYW1lIjoibmljbyIsIm5iZiI6MTY5OTg0MTAyOH0.JIp59tneOGMhLLEyQhcGIjbWtXKj4-NwKb6p_ser2EI",
+								"value": "Bearer (JWToken)",
 								"type": "text"
 							}
 						],
