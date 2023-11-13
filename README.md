@@ -17,8 +17,8 @@
 * Abrir Postman y hacer las peticiones a los endpoints.
 
 ## Postman
-* La configuración del <ins>ambiente</ins> de Postman para está aplicación se encuenta con el nombre: `Video converver - localhost.postman_environment.json` en la carpeta raíz del repositorio. Impórtela para poder hacer uso correcto de la colección.
-* La configuración de la <ins>colección</ins> de Postman para esta aplicación se encuentra con el nombre: `Video converter - Team 7.postman_collection.json` en la carpeta raíz del repositorio. Impórtela para poder probar los endpoints más fácil y cómodamente. (Recuerde importar la configuración del ambiente del paso anterior)
+* La configuración del <ins>ambiente</ins> de Postman para usar esta aplicación desplegada en la nube se encuenta con el nombre: `Video converver - localhost.postman_environment.json` en la carpeta raíz del repositorio. Impórtela para poder hacer uso correcto de la colección.
+* La configuración de la <ins>colección</ins> de Postman para usar esta aplicación desplegada en la nube se encuentra con el nombre: `Video converter - Team 7.postman_collection.json` en la carpeta raíz del repositorio. Impórtela para poder probar los endpoints más fácil y cómodamente. (Recuerde importar la configuración del ambiente del paso anterior)
 
 ## Endpoints
 Para ver la documentación completa sobre los distintos endpoints de esta aplicación, es necesario que importe la configuración de la colección de Postman del paso anterior.
