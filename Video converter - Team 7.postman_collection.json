@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a31128d9-f035-4a68-b861-3961c11aa910",
+		"_postman_id": "449f44b9-508b-4c88-9a9f-377b08f5a962",
 		"name": "Video converter - Team 7",
 		"description": "# Documentación\n\nEsta aplicación permite convertir el formato de un video a un formato deseado. Está construida principalmente con Python, usando el framework Flask, así como Postgres, Redis y Celery, entre otros.\n\nEsta colección se puede ejecutar de manera local utilizando Docker, puede ver las intrucciones de instalación en el [repositorio](https://github.com/jjpenad/MISW4203-CloudConverter).\n\nPara los endpoints que requieren de autenticación, debe agregar un token válido que se genera al hacer un login exitoso. Para esto, en esas peticiones que lo requieren, agregue los siguientes campos en la pestaña `Headers:`\n\n| Key | Value | Description |\n| --- | --- | --- |\n| Authorization | Bearer (JWToken) | Reemplace todo el texto (JWToken) por el token que se generó en la autenticación |",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -73,7 +73,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer (JWToken)",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTg0MTAyOCwianRpIjoiZTcwZGY2ZmYtZWZiZi00MWI2LTllNjctZDIwMmZmYTRkNGI0IiwidHlwZSI6ImFjY2VzcyIsInVzZXJuYW1lIjoibmljbyIsIm5iZiI6MTY5OTg0MTAyOH0.JIp59tneOGMhLLEyQhcGIjbWtXKj4-NwKb6p_ser2EI",
 								"type": "text"
 							}
 						],
@@ -81,13 +81,13 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "file",
-									"type": "file",
-									"src": []
+									"key": "url",
+									"value": "https://drive.google.com/uc?export=download&id=1QZosJJ5V8jHPbSsGHR_FOrB3IqpwenNJ",
+									"type": "text"
 								},
 								{
 									"key": "newFormat",
-									"value": "",
+									"value": "webm",
 									"type": "text"
 								}
 							]
