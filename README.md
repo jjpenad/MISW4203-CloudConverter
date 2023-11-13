@@ -7,7 +7,7 @@
 * Conocimientos en Git
 * Conocimientos en Postman y API REST
 
-## Instalación
+## Instalación (Local)
 * Clonar este repositorio en un directorio local
 * Acceder a la carpeta de este repositorio y luego a la carpeta `/app`
 * Si en la carpeta `/app` no existen las carpetas `/output` y `/uploads`, créelas en este directorio
@@ -21,4 +21,7 @@
 * La configuración de la <ins>colección</ins> de Postman para esta aplicación se encuentra con el nombre: `Video converter - Team 7.postman_collection.json` en la carpeta raíz del repositorio. Impórtela para poder probar los endpoints más fácil y cómodamente. (Recuerde importar la configuración del ambiente del paso anterior)
 
 ## Endpoints
-_Under construction_
+Para ver la documentación completa sobre los distintos endpoints de esta aplicación, es necesario que importe la configuración de la colección de Postman del paso anterior.
+
+## Despliegue básico en la nube:
+Actualmente, nuestra aplicación se encuentra desplegada en GCP en la siguiente [URL](http://34.29.108.46:5000). Los endpoints son los mismos que para la aplicación local, solo habría que cambiar el `localhost` por la IP anteriormente referenciada.
