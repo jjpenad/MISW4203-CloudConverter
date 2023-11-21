@@ -1,6 +1,7 @@
 
 import os
 from dotenv import load_dotenv
+import traceback
 from src.tasks import convert_video
 import uuid
 from google.cloud import pubsub_v1
@@ -38,9 +39,8 @@ def callback(message):
 
     try:
         convert_video(inputJson.get("task_id"), inputJson.get("input_url"), inputJson.get("output_format"))
-    except Exception as e:
-        print("ERROR", e)
-        #print("ERROR CONVERTING", input)
+    except:
+        traceback.print_exc()
     
     message.ack()
 
