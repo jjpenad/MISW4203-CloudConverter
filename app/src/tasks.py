@@ -25,7 +25,7 @@ def convert_video(task_id, input_url, output_format):
         input_path = os.path.join(os.getcwd(), config.UPLOAD_FOLDER, f"{task_id}_input.{output_format}")
         output_path = os.path.join(os.getcwd(), config.OUTPUT_FOLDER, f"{task_id}_output.{output_format}")
         
-        with open(input_path, 'wb') as file:
+        with open(input_path, 'x') as file:
             for chunk in response.iter_content(chunk_size=1024):
                 if chunk:
                     file.write(chunk)
