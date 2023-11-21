@@ -39,8 +39,8 @@ def callback(message):
     try:
         convert_video(inputJson.get("task_id"), inputJson.get("input_url"), inputJson.get("output_format"))
     except Exception as e:
-        print("ERROR CONVERTING", input)
-        print("ERROR CONVERTING", e)
+        print("ERROR", e)
+        #print("ERROR CONVERTING", input)
     
     message.ack()
 
