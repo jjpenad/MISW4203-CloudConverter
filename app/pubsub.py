@@ -14,12 +14,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-    # Load configuration from a .env file
-load_dotenv()
-
-# Configure the database
-db.init_app(app)
-
 
 topic_name = 'projects/{project_id}/topics/{topic}'.format(
     project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
@@ -32,6 +26,15 @@ subscription_name = 'projects/{project_id}/subscriptions/{sub}'.format(
 )
 
 def callback(message):
+
+    # Load configuration from a .env file
+    load_dotenv()
+
+    # Configure the database
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+
     print(message.data)
     input = message.data
     print(input)
