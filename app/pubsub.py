@@ -10,10 +10,19 @@ from google.cloud import pubsub_v1
 import json
 from google.auth import jwt
 
-load_dotenv()
-
 app = Flask(__name__)
 
+# Load configuration from a .env file
+load_dotenv()
+
+# Load configuration from config.py
+app.config.from_pyfile('./config.py')
+
+# Configure the database
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 topic_name = 'projects/{project_id}/topics/{topic}'.format(
     project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
@@ -26,14 +35,6 @@ subscription_name = 'projects/{project_id}/subscriptions/{sub}'.format(
 )
 
 def callback(message):
-
-    # Load configuration from a .env file
-    load_dotenv()
-
-    # Configure the database
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
 
     print(message.data)
     input = message.data
