@@ -9,7 +9,7 @@ from google.auth import jwt
 
 load_dotenv()
 
-service_account_info = json.load(open(os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')))
+#service_account_info = json.load(open(os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')))
 service_account_file = os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')
 audience = "https://pubsub.googleapis.com/google.pubsub.v1.Subscriber"
 
