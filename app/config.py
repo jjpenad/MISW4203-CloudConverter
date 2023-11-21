@@ -32,6 +32,10 @@ POSTGRES_DB=os.getenv('POSTGRES_DB', "test")
 POSTGRES_USER=os.getenv('POSTGRES_USER', "test")
 POSTGRES_PASSWORD=os.getenv('POSTGRES_PASSWORD', "test")
 
+GOOGLE_CLOUD_PROJECT=os.getenv('GOOGLE_CLOUD_PROJECT')
+GOOGLE_CLOUD_BUCKET=os.getenv('GOOGLE_CLOUD_BUCKET')
+GOOGLE_CLOUD_CREDENTIALS_PATH=os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')
+
 # Marshmallow Config
 from marshmallow import fields
 

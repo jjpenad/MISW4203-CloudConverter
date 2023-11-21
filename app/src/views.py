@@ -2,6 +2,7 @@ import os
 from flask import request, jsonify, current_app, Blueprint
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from .models import db, User, Task
+from google.cloud import pubsub_v1
 from .tasks import convert_video
 
 api = Blueprint('api', __name__)
@@ -84,8 +85,19 @@ def create_task():
     db.session.add(task)
     db.session.commit()
 
-    # Send the conversion task to Celery
-    convert_video.apply_async(args=(task.id, url, new_format))
+    publisher = pubsub_v1.PublisherClient()
+    topic_name = 'projects/{project_id}/topics/{topic}'.format(
+        project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
+        topic='worker-topic',  # Set this to something appropriate.
+    )
+    publisher.create_topic(name=topic_name)
+    info = {
+        "task_id":task.id,
+         "input_url":url, 
+         "output_format": new_format
+    }
+    future = publisher.publish(topic_name, info, spam='eggs')
+    future.result()
 
     return jsonify({'message': 'Task created successfully'}), 201
 

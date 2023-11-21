@@ -4,9 +4,9 @@ from flask import current_app
 import requests
 from .models import db, Task
 from celery import shared_task
+import config
+from google.cloud import storage
 
-
-@shared_task(ignore_result=False)
 def convert_video(task_id, input_url, output_format):
     try:
         task = Task.query.get(task_id)
@@ -49,4 +49,18 @@ def convert_video(task_id, input_url, output_format):
 
 
 def upload_to_gcp_bucket(task_id, file_path, output_format):
-    print(".............Sending to GCP.......", flush=True)
+    project_id = config.GOOGLE_CLOUD_PROJECT
+    bucket_name = config.GOOGLE_CLOUD_BUCKET
+    credentials_path = config.GOOGLE_CLOUD_CREDENTIALS_PATH
+
+    client = storage.Client(project=project_id)
+    bucket = client.bucket(bucket_name)
+
+    blob_name = f"{task_id}_output.{output_format}"
+    blob = bucket.blob(blob_name)
+
+    # Upload the file to GCP bucket
+    blob.upload_from_filename(file_path)
+
+    # Delete the local file after uploading to GCP
+    os.remove(file_path)
