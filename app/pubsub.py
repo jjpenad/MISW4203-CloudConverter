@@ -10,12 +10,12 @@ from google.auth import jwt
 load_dotenv()
 
 #service_account_info = json.load(open(os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')))
-service_account_file = os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')
-audience = "https://pubsub.googleapis.com/google.pubsub.v1.Subscriber"
+#service_account_file = os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')
+#audience = "https://pubsub.googleapis.com/google.pubsub.v1.Subscriber"
 
-credentials = jwt.Credentials.from_service_account_file(
-        filename=service_account_file,
-)
+#credentials = jwt.Credentials.from_service_account_file(
+#        filename=service_account_file,
+#)
 
 topic_name = 'projects/{project_id}/topics/{topic}'.format(
     project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
