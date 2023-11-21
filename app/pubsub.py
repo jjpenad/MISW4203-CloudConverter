@@ -1,5 +1,7 @@
 
 import os
+from flask import Flask
+from src.models import db
 from dotenv import load_dotenv
 import traceback
 from src.tasks import convert_video
@@ -10,13 +12,14 @@ from google.auth import jwt
 
 load_dotenv()
 
-#service_account_info = json.load(open(os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')))
-#service_account_file = os.getenv('GOOGLE_CLOUD_CREDENTIALS_PATH')
-#audience = "https://pubsub.googleapis.com/google.pubsub.v1.Subscriber"
+app = Flask(__name__)
 
-#credentials = jwt.Credentials.from_service_account_file(
-#        filename=service_account_file,
-#)
+    # Load configuration from a .env file
+load_dotenv()
+
+# Configure the database
+db.init_app(app)
+
 
 topic_name = 'projects/{project_id}/topics/{topic}'.format(
     project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
